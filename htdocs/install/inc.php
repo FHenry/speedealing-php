@@ -80,6 +80,19 @@ $conffiletoshow = "htdocs/conf/conf.php";
 //$conffile = "/etc/dolibarr/conf.php";
 //$conffiletoshow = "/etc/dolibarr/conf.php";
 
+$result=include_once($conffile);	// Load conf file
+if (!$result)
+{
+	print 'Conf file cannot be found. Please contact your administor.';
+	if (!empty($dolibarr_main_url_root)) {
+		print 'Click on following link. ';
+		print '<a href="' . $dolibarr_main_url_root . '/admin/index.php?mainmenu=home&leftmenu=setup' . (isset($_POST["login"]) ? '&username=' . urlencode($_POST["login"]) : '') . '">';
+		print 'Click here to go to Speadeeling';
+		print '</a>';
+	}
+	exit;
+}
+
 
 define('DOL_CLASS_PATH', 'class/');                             // Filsystem path to class dir
 define('DOL_DATA_ROOT', (isset($dolibarr_main_data_root) ? $dolibarr_main_data_root : ''));
